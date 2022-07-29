@@ -21,16 +21,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
           
-      # - name: Push to ECR
-      #   id: tag
-      #   run: |
-      #     aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
-      #     docker-compose build
+      - name: Push to ECR
+        id: tag
+        run: |
+          aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
+          docker-compose build
 
-      #   env:
-      #     accountid: ${{ secrets.ACCOUNTID}}
-      #     region: ${{ secrets.REGION }}
-      #     ecr_repository: ${{ secrets.ECR_REPOSITORY }}
+        env:
+          accountid: ${{ secrets.ACCOUNTID}}
+          region: ${{ secrets.REGION }}
+          ecr_repository: ${{ secrets.ECR_REPOSITORY }}
   
   on-failure:
     runs-on: ubuntu-latest
