@@ -7,11 +7,9 @@ on:
       - completed
 
 jobs:
-
-  build:
-
+  on-success:
     runs-on: ubuntu-latest
-
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Check out
         uses: actions/checkout@v2
@@ -47,3 +45,8 @@ jobs:
           cd backend && cd infrastructure
           terraform plan -var repository_name=${{ secrets.ECR_BE_REPOSITORY }} -out=tfplan
           terraform apply -input=false -auto-approve tfplan
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
