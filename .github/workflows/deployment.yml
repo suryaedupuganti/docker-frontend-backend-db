@@ -20,12 +20,18 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
+        
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo DOCKER_REGISTRY=${accountid}.dkr.ecr.${region}.amazonaws.com >> .env
+          cat .env
           
       - name: Push to ECR
         id: tag
         run: |
           aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
-          docker-compose build --build-arg DOCKER_REGISTRY=${accountid}.dkr.ecr.${region}.amazonaws.com
+          docker-compose build
           docker-compose push
 
         env:
