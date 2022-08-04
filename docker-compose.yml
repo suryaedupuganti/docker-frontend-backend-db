@@ -2,6 +2,7 @@ version: "3.7"
 
 services:
   api:
+    image: ${DOCKER_REGISTRY}/psi-docker-be
     build: ./backend
     environment:
       - CONNECTION_STRING=postgres://demo_user:demo_user@db/demo_db
@@ -12,6 +13,7 @@ services:
       - network-frontend
 
   webapp:
+    image: ${DOCKER_REGISTRY}/psi-docker-fe
     build: ./frontend
     environment:
       - API_URL=http://api:3001/data

@@ -26,6 +26,7 @@ jobs:
         run: |
           aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
           docker-compose build
+          docker-compose push
 
         env:
           accountid: ${{ secrets.ACCOUNTID}}
