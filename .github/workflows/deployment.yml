@@ -26,7 +26,7 @@ jobs:
         run: |
           aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
           docker-compose build
-          docker-compose push
+          docker-compose push -e DOCKER_REGISTRY=742473311130.dkr.ecr.ap-south-1.amazonaws.com
 
         env:
           accountid: ${{ secrets.ACCOUNTID}}
