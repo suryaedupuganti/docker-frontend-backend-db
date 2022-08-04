@@ -24,7 +24,7 @@ jobs:
       - name: 'Create env file'
         run: |
           touch .env
-          echo DOCKER_REGISTRY=${accountid}.dkr.ecr.${region}.amazonaws.com >> .env
+          echo DOCKER_REGISTRY=${{ secrets.ACCOUNTID}}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com >> .env
           cat .env
           
       - name: Push to ECR
