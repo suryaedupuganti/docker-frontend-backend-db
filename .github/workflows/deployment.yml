@@ -49,6 +49,9 @@ jobs:
           docker context create ecs psi-ecs
           docker compose use psi-ecs
           docker compose up
+        
+        env:
+          DOCKER_CLI_EXPERIMENTAL: enabled
   
   on-failure:
     runs-on: ubuntu-latest
