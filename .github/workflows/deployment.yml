@@ -2,7 +2,7 @@ name: Publish Docker Image
 
 on:
   workflow_run:
-    workflows: [db]
+    workflows: [presettings]
     types:
       - completed
 
@@ -32,16 +32,6 @@ jobs:
           touch .env
           echo DOCKER_REGISTRY=${{ secrets.ACCOUNTID}}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com >> .env
           cat .env
-        
-      - name: Experimental status
-        run: |
-          docker version -f '{{.Server.Experimental}}' 
-
-      - name: Plain job
-        run: |
-          echo $'{\n    "experimental": true\n}' | sudo tee /etc/docker/daemon.json 
-          sudo service docker restart
-          docker version -f '{{.Server.Experimental}}' 
           
       - name: Push to ECR
         id: tag
