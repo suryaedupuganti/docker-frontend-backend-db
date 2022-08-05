@@ -1,4 +1,4 @@
-name: presetting
+name: db
 
 on:
   workflow_run:
