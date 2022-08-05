@@ -1,4 +1,4 @@
-name: Pre Setting
+name: presettings
 
 on:
   workflow_run:
@@ -26,7 +26,7 @@ jobs:
           echo $'{\n    "experimental": true\n}' | sudo tee /etc/docker/daemon.json 
           sudo service docker restart
           docker version -f '{{.Server.Experimental}}'
-          
+
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
