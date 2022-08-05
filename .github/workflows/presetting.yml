@@ -1,4 +1,4 @@
-name: presetting
+name: Pre Conditions
 
 on:
   workflow_run:
