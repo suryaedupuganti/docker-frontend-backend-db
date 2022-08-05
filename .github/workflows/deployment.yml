@@ -32,12 +32,18 @@ jobs:
         run: |
           aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
           docker-compose build
-          docker-compose push
+          docker-compose push    
 
         env:
           accountid: ${{ secrets.ACCOUNTID}}
           region: ${{ secrets.REGION }}
           ecr_repository: ${{ secrets.ECR_REPOSITORY }}
+
+      - name: Deploy to ECS
+        run: |
+          docker context create ecs psi-ecs
+          docker compose use psi-ecs
+          docker compose up
   
   on-failure:
     runs-on: ubuntu-latest
