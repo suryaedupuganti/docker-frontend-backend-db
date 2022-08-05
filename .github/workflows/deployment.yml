@@ -2,7 +2,7 @@ name: Publish Docker Image
 
 on:
   workflow_run:
-    workflows: [db]
+    workflows: [presetting]
     types:
       - completed
 
