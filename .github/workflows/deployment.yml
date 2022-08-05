@@ -32,6 +32,12 @@ jobs:
           touch .env
           echo DOCKER_REGISTRY=${{ secrets.ACCOUNTID}}.dkr.ecr.${{ secrets.REGION }}.amazonaws.com >> .env
           cat .env
+        
+      - name: Plain job
+        run: |
+          echo $'{"experimental": true}' | sudo dd status=none of=/etc/docker/daemon.json 
+          sudo service docker restart
+          docker version -f '{{.Server.Experimental}}' 
           
       - name: Push to ECR
         id: tag
