@@ -10,6 +10,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: ${{ secrets.REGION }}
+  DOCKER_CLI_EXPERIMENTAL: enabled
 
 jobs:
   on-success:
@@ -49,9 +50,6 @@ jobs:
           docker context create ecs psi-ecs
           docker compose use psi-ecs
           docker compose up
-        
-        env:
-          DOCKER_CLI_EXPERIMENTAL: enabled
   
   on-failure:
     runs-on: ubuntu-latest
