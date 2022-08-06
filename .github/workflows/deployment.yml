@@ -46,6 +46,11 @@ jobs:
           ecr_repository: ${{ secrets.ECR_REPOSITORY }}
           DOCKER_CLI_EXPERIMENTAL: enabled
 
+      - name: 'Install docker plugin'
+        run: |
+            sudo apt-get update
+            sudo apt-get install docker-compose-plugin
+
       - name: Experimental status
         run: |
           docker version
