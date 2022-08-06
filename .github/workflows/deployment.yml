@@ -2,7 +2,7 @@ name: Publish Docker Image
 
 on:
   workflow_run:
-    workflows: ["Pre Conditions"]
+    workflows: [db]
     types:
       - completed
 
@@ -45,6 +45,17 @@ jobs:
           region: ${{ secrets.REGION }}
           ecr_repository: ${{ secrets.ECR_REPOSITORY }}
           DOCKER_CLI_EXPERIMENTAL: enabled
+
+      - name: Experimental status
+        run: |
+          docker version
+          docker version -f '{{.Server.Experimental}}' 
+
+      - name: Plain job
+        run: |
+          echo $'{\n    "experimental": true\n}' | sudo tee /etc/docker/daemon.json 
+          sudo service docker restart
+          docker version -f '{{.Server.Experimental}}'
 
       - name: Deploy to ECS
         run: |
