@@ -49,6 +49,7 @@ jobs:
       - name: Experimental status
         run: |
           docker version
+          docker compose version
           docker version -f '{{.Server.Experimental}}' 
 
       - name: Plain job
