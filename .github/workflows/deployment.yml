@@ -26,6 +26,10 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
+      
+      - name: ECS CLI
+        run: |
+            ecs-cli
         
       - name: 'Create env file'
         run: |
@@ -45,11 +49,6 @@ jobs:
           region: ${{ secrets.REGION }}
           ecr_repository: ${{ secrets.ECR_REPOSITORY }}
           DOCKER_CLI_EXPERIMENTAL: enabled
-
-      - name: 'Install docker plugin'
-        run: |
-            sudo apt-get update
-            sudo apt-get install docker-compose-plugin
 
       - name: Experimental status
         run: |
