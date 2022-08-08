@@ -31,7 +31,7 @@ services:
       POSTGRES_PASSWORD: demo_user
       POSTGRES_DB: demo_db
     volumes:
-      - db-volume: ./db/init_sql_scripts/:/docker-entrypoint-initdb.d
+      - db-volume:./db/init_sql_scripts/:/docker-entrypoint-initdb.d
     networks:
       - network-backend
 

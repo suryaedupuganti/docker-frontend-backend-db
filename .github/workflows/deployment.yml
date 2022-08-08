@@ -65,7 +65,7 @@ jobs:
           docker version -f '{{.Server.Experimental}}' 
           docker context create ecs psi-ecs --from-env
           docker context use psi-ecs
-          docker compose up
+          docker --debug compose -f docker-compose.yml up
 
         env:
           DOCKER_CLI_EXPERIMENTAL: enabled
